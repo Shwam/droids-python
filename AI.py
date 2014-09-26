@@ -18,7 +18,7 @@ class AI(BaseAI):
   ##This function is called once, before your first turn
   def init(self):
   	self.players[self.playerID].orbitalDrop(0, 0, randint(0,7) )
-    pass
+    return
 
   ##This function is called once, after your last turn
   def end(self):
