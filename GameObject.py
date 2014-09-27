@@ -332,6 +332,13 @@ class Droid(Mappable):
   ##The maximum number of hackets that can be sustained before hacked. If 0, the Droid cannot be hacked.
   hacketsMax = property(getHacketsMax)
 
+  def getForward(self):
+    self.validify()
+    if self.owner == 0:
+      return self.x + 1
+    return self.x - 1
+  forward = property(getForward)
+
 
   def __str__(self):
     self.validify()
