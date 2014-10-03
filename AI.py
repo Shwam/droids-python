@@ -56,14 +56,14 @@ class AI(BaseAI):
   def move_units(self):
     for droid in self.droids:
       canMove = True
-      while droid.movementLeft > 0 and canMove:
+      if droid.movementLeft > 0 and canMove:
         if droid.controller == self.playerID:
-          print("Attempting to move {}...".format(droid.id))
+          #print("Attempting to move {}...".format(droid.id))
           if droid.forward >= 0 and droid.forward < self.mapWidth and self.empty(droid.forward, droid.y):          
               self.units[droid.forward+self.mapWidth*droid.y] = self.units[droid.x + self.mapWidth * droid.y]
               self.units[droid.x + self.mapWidth * droid.y] = None
               droid.move(droid.forward, droid.y)
-              print("Success! Forward -> {}".format(droid.x))
+              #print("Success! Forward -> {}".format(droid.x))
 
               #print("{} < {} ... {}".format(droid.forward, self.mapWidth, droid.forward < self.mapWidth))
               #print("{}, {} is {}... empty = {}".format(droid.x, droid.y, self.unit(droid.x, droid.y), self.empty(droid.forward, droid.y)))
@@ -73,20 +73,20 @@ class AI(BaseAI):
               self.units[droid.x+self.mapWidth*y] = self.units[droid.x + self.mapWidth * droid.y]
               self.units[droid.x + self.mapWidth * droid.y] = None
               droid.move(droid.x, y)
-              print("Success! Up -> {}".format(droid.y))
+              #print("Success! Up -> {}".format(droid.y))
             else:
               y = -y
               if y >= 0 and y < self.mapHeight and self.empty(droid.x, y):
                 self.units[droid.x+self.mapWidth*y] = self.units[droid.x + self.mapWidth * droid.y]
                 self.units[droid.x + self.mapWidth * droid.y] = None
                 droid.move(droid.x, y)
-                print("Success! Up/Down -> {}".format(droid.y))
+                #print("Success! Up/Down -> {}".format(droid.y))
               else:
                 canMove = False
-                print("Failed.")
+                #print("Failed.")
         else:
           canMove = False
-          print("Failed.")
+          #print("Failed.")
           #print("Droid {} trying to move up or down".format(droid.id))
     
     return 1
