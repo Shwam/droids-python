@@ -172,7 +172,7 @@ class Droid(Mappable):
     self.validify()
     return library.droidOperate(self._ptr, x, y)
 
-  #\cond
+  #\condmap
   def getId(self):
     self.validify()
     return library.droidGetId(self._ptr)
@@ -332,13 +332,44 @@ class Droid(Mappable):
   ##The maximum number of hackets that can be sustained before hacked. If 0, the Droid cannot be hacked.
   hacketsMax = property(getHacketsMax)
 
-  def getForward(self):
+  def getForward(self, amount=1):
     self.validify()
     if self.owner == 0:
-      return self.x + 1
-    return self.x - 1
+      return self.x + amount
+    return self.x - amount
   forward = property(getForward)
 
+  def getBack(self, amount=1):
+    self.validify()
+    if self.owner == 0:
+      return self.x - amount
+    return self.x + amount
+  back = property(getBack)
+
+  def getUp(self, amount=1):
+    self.validify()
+    if self.owner == 0:
+      return self.y + amount
+    return self.y - amount
+  up = property(getUp)
+
+  def getDown(self, amount=1):
+    self.validify()
+    if self.owner == 0:
+      return self.y - amount
+    return self.y + amount
+  down = property(getDown)
+
+  def getController(self):
+    self.validify()
+    if self.owner == 0:
+      if self.hackedTurnsLeft == 0:
+        return 0
+      return 1
+    if self.owner == 1 and self.hackedTurnsLeft == 0:
+      return 1
+    return 0
+  controller = property(getController)
 
   def __str__(self):
     self.validify()
