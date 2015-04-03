@@ -346,17 +346,23 @@ class Droid(Mappable):
     return self.x + amount
   back = property(getBack)
 
+  def getLeft(self, amount=1):
+    self.validify()
+    return self.x - amount
+  left = property(getLeft)
+
+  def getRight(self, amount=1):
+    self.validify()
+    return self.x + amount
+  right = property(getRight)
+
   def getUp(self, amount=1):
     self.validify()
-    if self.owner == 0:
-      return self.y + amount
     return self.y - amount
   up = property(getUp)
 
   def getDown(self, amount=1):
     self.validify()
-    if self.owner == 0:
-      return self.y - amount
     return self.y + amount
   down = property(getDown)
 
